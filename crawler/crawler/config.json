@@ -1,0 +1,9 @@
+{
+	"RDS": {
+		"HOST" : "ssubobbot.cokkxyhuew8x.ap-northeast-2.rds.amazonaws.com",
+		"PORT" : 3306,
+		"USERNAME" : "root",
+		"DATABASE" : "ssubobbot",
+		"PASSWORD" : "rladntjr97"
+	}
+}
