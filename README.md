@@ -6,4 +6,4 @@
 2021년 5월 23일 - ver 1.0 배포
 
 ### 시스템 구성도
-https://user-images.githubusercontent.com/55542546/123433349-52aab880-d606-11eb-8b9a-5209149065d7.png
+![시스템 구조도](https://user-images.githubusercontent.com/55542546/123433349-52aab880-d606-11eb-8b9a-5209149065d7.png)
