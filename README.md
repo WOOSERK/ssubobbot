@@ -7,7 +7,7 @@
 ![포스터](https://user-images.githubusercontent.com/55542546/123440859-33b02480-d60e-11eb-8213-97051db1eb38.jpg)
 
 ### 로고
-![슈밥](https://user-images.githubusercontent.com/55542546/123441938-5f7fda00-d60f-11eb-9f80-657393627eac.jpg)
+![슈밥](https://user-images.githubusercontent.com/55542546/159220896-ea9c2541-f731-4ee6-81b5-a704d60dfd4c.png)
 
 ### 시스템 구성도
 ![시스템 구조도](https://user-images.githubusercontent.com/55542546/123433349-52aab880-d606-11eb-8b9a-5209149065d7.png)
