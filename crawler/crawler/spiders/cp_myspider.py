@@ -36,7 +36,6 @@ class CrawlerSpider(scrapy.Spider):
 
         for attr in list:
             st = ''
-            # div만 파싱한다.
             menus = attr.css('div').xpath('string()').extract()
             if len(menus) >= 2:
                 index = 1
@@ -45,9 +44,9 @@ class CrawlerSpider(scrapy.Spider):
                     menus[i] = re.sub(r'[\xa0]', '', menus[i])
 
                 while index < len(menus):
-                    if menus[index] != '' and ((menus[index][0] >= 'A' and menus[index][0] <= 'Z') or (menus[index][0] >= 'a' and menus[index][0] <= 'z')) :
+                    if menus[index] != '' and menus[index][0] >= 'A' and menus[index][0] <= 'z':
                         index -= 1
-                        while menus[index] == '':
+                        while(menus[index] == ''):
                             index -= 1
 
                         break
@@ -123,14 +122,10 @@ class CrawlerSpider(scrapy.Spider):
 
         meals = []
 
-        # 점심 1코너가 없어져서 3으로 변경
-        lim = 3
-        # lim = 4
+        lim = 4
         # 점심 3코너가 입력됐을 경우
-        '''
         if menus[7].css('td').xpath('string()').extract() == '점심 3코너':
             lim = 5
-        '''
 
         for i in range(0, lim):
             meals.append(self.extractMenu(menus[7*i + 1 : 7*i + 6]))
@@ -153,13 +148,7 @@ class CrawlerSpider(scrapy.Spider):
         flg1 = self.extractMenu(flg1)
         '''
 
-        '''
         # 조식이 없음
-        # 학생식당이 없어져서 4에서 3으로 변경
-        location = ['숭실도담', '숭실도담', 'FACULTY LOUNGE']
-        time = ['중식', '석식', '중식']
-        '''
-
         if lim == 4:
             location = ['학생식당 1코너', '숭실도담', '숭실도담', 'FACULTY LOUNGE']
             time = ['중식', '중식', '석식', '중식']
@@ -168,7 +157,6 @@ class CrawlerSpider(scrapy.Spider):
             time = ['중식', '중식', '중식', '석식', '중식']
 
         data = {}
-        # 월화수목금 5일
         for i in range(0, 5):
             #menu = [stc1[i], stc2[i], dodLun[i], dodDin[i], flg1[i]]
             menu = []
