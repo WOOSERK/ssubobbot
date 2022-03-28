@@ -34,43 +34,9 @@ class CrawlerSpider(scrapy.Spider):
     def extractMenu(self, list):
         ret = []
 
-        for attr in list:
-            st = ''
-            # div만 파싱한다.
-            menus = attr.css('div').xpath('string()').extract()
-            if len(menus) >= 2:
-                index = 1
-
-                for i in range(0, len(menus)):
-                    menus[i] = re.sub(r'[\xa0]', '', menus[i])
-
-                while index < len(menus):
-                    if menus[index] != '' and ((menus[index][0] >= 'A' and menus[index][0] <= 'Z') or (menus[index][0] >= 'a' and menus[index][0] <= 'z')) :
-                        index -= 1
-                        while menus[index] == '':
-                            index -= 1
-
-                        break
-
-                    index += 1
-
-                if index < len(menus):
-                    st = menus[index]
-
-                '''
-                index = menus.index('') + 1
-
-                # 여러 줄 띄워져 있을 경우를 대비
-                while st == '':
-                    print('zz' + st)
-                    st = re.sub(r'[\xa0]', '', menus[index])
-                    index+=1
-                    if index >= len(menus):
-                        break
-                '''
-
-            # 문자열이 없으면 메뉴가 없는 것
-            ret.append(st)
+        for i in range(0, len(list)):
+            list[i] = re.sub(r'[\xa0]', '', list[i])
+            ret.append(list[i])
 
         return ret
 
@@ -117,50 +83,21 @@ class CrawlerSpider(scrapy.Spider):
         # 월요일부터 기록
         date -= datetime.timedelta(days=date.weekday())
 
-        menus = response.css('[class^=menu-list]')
-
-        # response.css('.rest-ico ~ div').extract()
+        menus = response.xpath('//td[contains(@class, "menu-list")]').xpath('//b[contains(text(), ".")]').xpath('text()').getall()
 
         meals = []
 
-        # 점심 1코너가 없어져서 3으로 변경
+        # 학생식당이 없어져서 lim = 3
         lim = 3
         # lim = 4
-        # 점심 3코너가 입력됐을 경우
-        '''
-        if menus[7].css('td').xpath('string()').extract() == '점심 3코너':
-            lim = 5
-        '''
 
         for i in range(0, lim):
-            meals.append(self.extractMenu(menus[7*i + 1 : 7*i + 6]))
+            meals.append(self.extractMenu(menus[5*i : 5*i + 5]))
 
-        '''
-        stc1 = menus[1:6]
-        stc1 = self.extractMenu(stc1)
-
-        # 없을 때가 있음
-        stc2 = menus[8:13]
-        stc2 = self.extractMenu(stc2)
-
-        dodLun = menus[15:20]
-        dodLun = self.extractMenu(dodLun)
-
-        dodDin = menus[22:27]
-        dodDin = self.extractMenu(dodDin)
-
-        flg1 = menus[29:34]
-        flg1 = self.extractMenu(flg1)
-        '''
-
-        '''
-        # 조식이 없음
-        # 학생식당이 없어져서 4에서 3으로 변경
-        location = ['숭실도담', '숭실도담', 'FACULTY LOUNGE']
-        time = ['중식', '석식', '중식']
-        '''
-
-        if lim == 4:
+        if lim == 3:
+            location = ['숭실도담', '숭실도담', 'FACULTY LOUNGE']
+            time = ['중식', '석식', '중식']
+        elif lim == 4:
             location = ['학생식당 1코너', '숭실도담', '숭실도담', 'FACULTY LOUNGE']
             time = ['중식', '중식', '석식', '중식']
         else:
@@ -170,7 +107,6 @@ class CrawlerSpider(scrapy.Spider):
         data = {}
         # 월화수목금 5일
         for i in range(0, 5):
-            #menu = [stc1[i], stc2[i], dodLun[i], dodDin[i], flg1[i]]
             menu = []
             for j in range(0, lim):
                 menu.append(meals[j][i])
