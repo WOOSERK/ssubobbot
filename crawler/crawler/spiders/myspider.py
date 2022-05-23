@@ -83,7 +83,7 @@ class CrawlerSpider(scrapy.Spider):
         # 월요일부터 기록
         date -= datetime.timedelta(days=date.weekday())
 
-        menus = response.xpath('//td[contains(@class, "menu-list")]').xpath('//b[contains(text(), ".")]').xpath('text()').getall()
+        menus = response.xpath('//td[contains(@class, "menu-list")]').xpath('(//b|//font)[contains(text(), ".")]').xpath('text()').getall()
 
         meals = []
 
