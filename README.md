@@ -10,7 +10,11 @@
 ![슈밥](https://user-images.githubusercontent.com/55542546/159256355-11db950c-1391-43c1-b612-677d8f07589f.png)
 
 ### 시스템 구성도
+**기존 서버 방식**
 ![시스템 구조도](https://user-images.githubusercontent.com/55542546/123433349-52aab880-d606-11eb-8b9a-5209149065d7.png)
+
+**개선한 서버리스 방식**
+![시스템 구조도](https://user-images.githubusercontent.com/55542546/205481466-6c1a76e4-3f59-4624-9e0f-0e8cbea94397.png)
 
 ### 개발 기록
 2021년 5월 23일(일) - ver 1.0 배포  
